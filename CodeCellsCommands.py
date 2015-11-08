@@ -17,8 +17,6 @@ def find_cell_bounds(self):
             post_begin = region.begin()
             break
 
-        # print(cell_begin, post_begin)
-
     return prior_begin, cell_begin, post_begin
 
 
@@ -33,10 +31,6 @@ class ExecuteCellCommand(sublime_plugin.TextCommand):
         cell_region = sublime.Region(cell_begin, cell_end)                
         cell_txt = self.view.substr(cell_region)
         sublime.set_clipboard(cell_txt + '\n')
-
-        print('------\ncell_txt:\n------')
-        print(cell_txt)
-        # print(IPython.version_info)
 
         # Move to next cell
         self.view.sel().clear()
@@ -97,7 +91,6 @@ class InsertCellDivider(sublime_plugin.TextCommand):
             if line.empty():
                 self.view.insert(edit, line.begin(), cell_divider % '')
                 # Move cursor to text enter area
-
                 line = down_a_line(self, line)
                 line = down_a_line(self, line)
                 self.view.sel().clear()
